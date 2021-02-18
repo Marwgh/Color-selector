@@ -20,32 +20,42 @@ function rgbToCss (theColor) {
      return finalString;
 }
 
-
 document.querySelector("#colorPicker").addEventListener("input",init);
 
 
  function init () {
+     const harmonie = document.querySelector("#harmonyChoice").value ;
      const input = document.querySelector("#colorPicker").value ;
      console.log(input);
      let rgbObject = hextorgb(input);
      console.log(rgbObject);
 
      let rgbShow = convert(rgbObject);
-     
-
-     const theShow = rgbToCss(rgbObject);
-     
-
+     let theShow = rgbToCss(rgbObject);
      let finalHex = toHex(rgbObject);
      
-
      let finalHsl = toHls(rgbObject);
+     //let finalrgb = hslToRgb(finaltHsl);
+     
+     
 
      for ( let index = 1 ; index <= 5 ; index++ ) {
-      showRgb(rgbShow , index) ;
+      if ( harmonie === "analogous" , index == 2 ) {
+        theShow = "rgb("+ (rgbObject.r.toString()-40 )+", " + rgbObject.g.toString()+", " + rgbObject.b.toString() +")" ;
+      console.log(theShow);
+      showRgb(rgbShow , index) ; 
       changeBack (theShow , index) ;
       showHex(finalHex , index) ;
       showHsl(finalHsl , index) ;
+      } else if ( harmonie === "analogous"   ) {
+      
+      showRgb(rgbShow , index) ; 
+      changeBack (theShow , index) ;
+      showHex(finalHex , index) ;
+      showHsl(finalHsl , index) ;
+        
+      }
+      
      }
      //more steps 
      
@@ -90,6 +100,8 @@ function changeBack (change , index) {
      return hex ;
 
  }
+
+ 
  
  function convert (rgbObject) {
     const colorBox = "(" + rgbObject.r + ", " + rgbObject.g+ ", " + rgbObject.b+ ")" ;
@@ -113,6 +125,51 @@ function changeBack (change , index) {
     
 
  }
+
+
+ function hslToRgb( hsl ) {
+  const h = hsl.h;
+  const s = hsl.s / 100;
+  const l = hsl.l / 100;
+ 
+let c = (1 - Math.abs(2 * l - 1)) * s,
+x = c * (1 - Math.abs(((h / 60) % 2) - 1)),
+m = l - c / 2,
+r = 0,
+g = 0,
+b = 0;
+if (0 <= h && h < 60) {
+r = c;
+g = x;
+b = 0;
+} else if (60 <= h && h < 120) {
+r = x;
+g = c;
+b = 0;
+} else if (120 <= h && h < 180) {
+r = 0;
+g = c;
+b = x;
+} else if (180 <= h && h < 240) {
+r = 0;
+g = x;
+b = c;
+} else if (240 <= h && h < 300) {
+r = x;
+g = 0;
+b = c;
+} else if (300 <= h && h < 360) {
+r = c;
+g = 0;
+b = x;
+}
+r = Math.round((r + m) * 255);
+g = Math.round((g + m) * 255);
+b = Math.round((b + m) * 255);
+
+return {r,g,b};
+}
+
 
  function toHls (rgbObject) {
      let r = rgbObject.r
@@ -155,6 +212,9 @@ function changeBack (change , index) {
     l *= 100;
   
     console.log("hsl(%f,%f%,%f%)", h, s, l); // just for testing
-     return "hsl("+h.toFixed()+"%,"+s.toFixed()+"%,"+l.toFixed()+"%)" ;
+    h = h.toFixed()
+    s = s.toFixed()
+    l = l.toFixed()
+    return {h,s,l}
  }
 
