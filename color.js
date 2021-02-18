@@ -5,13 +5,13 @@ function randomBackground () {
      
      const theColor = randomColor();
      const theString = rgbToCss(theColor);
-     document.getElementById("colorBox").style.backgroundColor = theString ;
+     document.getElementById("colorBox1").style.backgroundColor = theString ;
 
 }
 function randomColor () {
-     const r = Math.floor(Math.random()*255) ;
-     const g = Math.floor(Math.random()*255) ;
-     const b = Math.floor(Math.random()*255) ;
+     const r = Math.floor(Math.random()*256) ;
+     const g = Math.floor(Math.random()*256) ;
+     const b = Math.floor(Math.random()*25) ;
      return {r,g,b};
 }
 function rgbToCss (theColor) {
@@ -21,43 +21,49 @@ function rgbToCss (theColor) {
 }
 
 
-document.querySelector("input").addEventListener("input",init);
+document.querySelector("#colorPicker").addEventListener("input",init);
 
 
  function init () {
-     const input = document.querySelector("input").value ;
+     const input = document.querySelector("#colorPicker").value ;
      console.log(input);
      let rgbObject = hextorgb(input);
      console.log(rgbObject);
 
      let rgbShow = convert(rgbObject);
-     showRgb(rgbShow) ;
-
-    
+     
 
      const theShow = rgbToCss(rgbObject);
-     changeBack (theShow) ;
+     
 
      let finalHex = toHex(rgbObject);
-     showHex(finalHex) ;
+     
 
      let finalHsl = toHls(rgbObject);
-     showHsl(finalHsl) ;
+
+     for ( let index = 1 ; index <= 5 ; index++ ) {
+      showRgb(rgbShow , index) ;
+      changeBack (theShow , index) ;
+      showHex(finalHex , index) ;
+      showHsl(finalHsl , index) ;
+     }
+     //more steps 
+     
      
      
  }
 
-function showRgb (rgb) {
-     document.querySelector("#rgbC").textContent = rgb ;
+function showRgb (rgb , index) {
+     document.querySelector(`#colorBox${index} .rgbC`).textContent = rgb ;
 }
-function showHex (hex) {
-    document.querySelector("#hexC").textContent = hex ; 
+function showHex (hex , index) {
+    document.querySelector(`#colorBox${index} .hexC`).textContent = hex ; 
 }
-function showHsl (hsl) {
-    document.querySelector("#hsl").textContent = hsl ;
+function showHsl (hsl , index) {
+    document.querySelector(`#colorBox${index} .hsl`).textContent = hsl ;
 }
-function changeBack (change) {
-    document.getElementById("colorBox").style.backgroundColor = change ;
+function changeBack (change , index) {
+    document.getElementById(`colorBox${index}`).style.backgroundColor = change ;
 }
 
  function hextorgb(hex) {
@@ -75,9 +81,9 @@ function changeBack (change) {
  }
 
  function toHex (rgbObject) {
-     const hexR = rgbObject.r.toString(16);
-     const hexG = rgbObject.g.toString(16);
-     const hexB = rgbObject.b.toString(16);
+     const hexR = rgbObject.r.toString(16).padStart(2,"0");
+     const hexG = rgbObject.g.toString(16).padStart(2,"0");
+     const hexB = rgbObject.b.toString(16).padStart(2,"0");
 
      const hex = "#" + hexR + hexG + hexB ;
      console.log(hex);
@@ -149,6 +155,6 @@ function changeBack (change) {
     l *= 100;
   
     console.log("hsl(%f,%f%,%f%)", h, s, l); // just for testing
-     return "hsl("+h+"%,"+s+"%,"+l+"%)" ;
+     return "hsl("+h.toFixed()+"%,"+s.toFixed()+"%,"+l.toFixed()+"%)" ;
  }
 

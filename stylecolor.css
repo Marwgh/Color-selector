@@ -1,5 +1,15 @@
-#colorBox {
+.colorContainer {
     background-color :rgb(252, 0, 0) ;
     width: 30vw;
-    height: 30vw;
+    height: 10vw;
+    margin-bottom: 1vw;
+}
+body {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(30vw, 1fr));
+}
+
+#harmonies {
+    display: flex;
+    flex-direction: column;
 }

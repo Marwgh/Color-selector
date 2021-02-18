@@ -9,14 +9,61 @@
     <title>Document</title>
 </head>
 
-<body>
-    <input type="color">
-    <div id="colorBox">
+<!--<div id="harmony">
+    <label><input type="checkbox" id="choseHarmony" />Harmony</label>
+    <select id="harmonyChoice">
+        <option value="analogous">Analogous</option>
+        <option value="monochromatic">Monochromatic</option>
+        <option value="triad">Triad</option>
+        <option value="complementary">Complementary</option>
+        <option value="compound">Compound</option>
+        <option value="shades">Shades</option>
+    </select>
+</div>
+-->
 
-        <p id="hexC"></p>
-        <p id="rgbC"></p>
-        <p id="hsl"></p>
-    
+<div id="harmonies">
+
+    <label><input type="radio" name="harmony" value="analogous" />Analogous</label>
+
+    <label><input type="radio" name="harmony" value="monochromatic" />Monochromatic</label>
+
+    <label><input type="radio" name="harmony" value="triad" />Triad</label>
+
+    <label><input type="radio" name="harmony" value="complementary" />Complementary</label>
+
+    <label><input type="radio" name="harmony" value="compound" />Compound</label>
+
+    <label><input type="radio" name="harmony" value="shades" />Shades</label>
+
+</div>
+
+<body>
+    <input type="color" id="colorPicker">
+    <div id="colorBox1" class="colorContainer">
+        <p class="hexC"></p>
+        <p class="rgbC"></p>
+        <p class="hsl"></p>
+    </div>
+    <div id="colorBox2" class="colorContainer">
+        <p class="hexC"></p>
+        <p class="rgbC"></p>
+        <p class="hsl"></p>
+    </div>
+    <div id="colorBox3" class="colorContainer">
+        <p class="hexC"></p>
+        <p class="rgbC"></p>
+        <p class="hsl"></p>
+    </div>
+    <div id="colorBox4" class="colorContainer">
+        <p class="hexC"></p>
+        <p class="rgbC"></p>
+        <p class="hsl"></p>
+    </div>
+    <div id="colorBox5" class="colorContainer">
+        <p class="hexC"></p>
+        <p class="rgbC"></p>
+        <p class="hsl"></p>
     </div>
 </body>
 <script src="color.js"></script>
